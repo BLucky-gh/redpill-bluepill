@@ -1,9 +1,6 @@
 use clap::Parser;
-use nanoid::nanoid;
 use rand::random;
 use strum::IntoEnumIterator;
-
-static NANOID_SIZE: usize = 10;
 
 fn main() {
     let args = Args::parse();
@@ -76,17 +73,12 @@ enum PlayerType {
 
 #[derive(Debug)]
 struct Player {
-    _id: String,
     kind: PlayerType,
     pub vote: Option<Pill>,
 }
 impl Player {
     fn new(kind: PlayerType) -> Self {
-        Self {
-            _id: nanoid!(NANOID_SIZE),
-            vote: None,
-            kind,
-        }
+        Self { vote: None, kind }
     }
     fn choose_pill(&mut self) {
         self.vote = Some(match self.kind {
